@@ -1,23 +1,16 @@
 #!/bin/bash
 set -e
 if [[ $# != 1 ]]; then
-    echo Usage: ./nginx-setup.sh project_name;
+    echo Usage: $0 project_name;
     exit 1;
 fi
 
-# OS config
-USER=www-data
-GROUP=www-data
-
-# Conda setup
-CONDA=/opt/conda
-
 # Project configuration
-CONFIG_FILE=10-django-website.conf
 SERVER_NAME=_
 PROJECT_NAME=$1
 BASE_DIR=/var/www
 PROJECT_PATH=$BASE_DIR/$PROJECT_NAME
+CONFIG_FILE=10-django-$PROJECT_NAME.conf
 PORT=80
 
 CLIENT_MAX_BODY_SIZE=75M
@@ -35,10 +28,6 @@ if [ -f $NGINX_TMP_CONF ] || [ -f $NGINX_FINAL_CONF ]; then
     echo Project config file $CONFIG_FILE already exists in nginx config.
     exit 1
 fi
-
-
-# Install nginx
-apt-get install nginx
 
 cp ./$CONFIG_FILE $NGINX_TMP_CONF
 sed -i "s~\$SERVER_NAME~$SERVER_NAME~g" $NGINX_TMP_CONF

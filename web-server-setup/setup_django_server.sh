@@ -1,9 +1,14 @@
 #!/bin/bash
 set -e
+if [[ $# != 1 ]]; then
+    echo Usage: $0 project_name;
+    exit 1;
+fi
+
 
 CONDA_PKG=/opt/conda/bin
 
-PROJECT_NAME=externaldoc
+PROJECT_NAME=$1
 DOC_SRC_DIR=~/repositories/datapred/docs/
 PROJECT_DIR=/var/www/$PROJECT_NAME
 

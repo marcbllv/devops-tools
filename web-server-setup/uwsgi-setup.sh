@@ -1,5 +1,10 @@
 #!/bin/bash
 set -e
+if [[ $# != 1 ]]; then
+    echo Usage: $0 project_name;
+    exit 1;
+fi
+
 
 # OS config
 USER=www-data
@@ -9,7 +14,7 @@ GROUP=www-data
 CONDA_BIN=/opt/conda/bin
 
 # Project configuration
-PROJECT_NAME=externaldoc
+PROJECT_NAME=$1
 PROJECT_PATH=/var/www/$PROJECT_NAME
 
 UWSGI_RUN_DIR=/run/uwsgi

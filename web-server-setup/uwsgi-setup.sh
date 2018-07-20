@@ -23,6 +23,8 @@ UWSGI_CONFIG_FILE=$UWSGI_CONFIG_DIR/uwsgi-$PROJECT_NAME.ini
 UWSGI_SOCKET=$UWSGI_RUN_DIR/uwsgi-$PROJECT_NAME.sock
 UWSGI_PID_FILE=$UWSGI_RUN_DIR/uwsgi-$PROJECT_NAME.pid
 
+cd "$(dirname "$0")"
+
 # Set up uwsgi 
 mkdir -p $UWSGI_CONFIG_DIR
 cp ./uwsgi-config.ini $UWSGI_CONFIG_FILE
